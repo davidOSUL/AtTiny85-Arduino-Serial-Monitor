@@ -4,10 +4,10 @@
 #include "Arduino.h"
 class ArduinoSerialIn{
 public:
-	ArduinoSerialIn(int rate);
+	ArduinoSerialIn();
 	void readIfShould();
 private:
-	uint8_t _currentByteSize;
+	int8_t _currentByteSize;
 	uint8_t _currentType;
 	void readIfArray(uint8_t currType);
 	template <typename T>

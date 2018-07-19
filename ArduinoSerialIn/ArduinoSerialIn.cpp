@@ -1,21 +1,22 @@
 #include "ArduinoSerialIn.h"
 #include "SerialTypes.h"
 #include "Arduino.h"
-ArduinoSerialIn::ArduinoSerialIn(int rate)
+ArduinoSerialIn::ArduinoSerialIn()
 {
-	Serial.begin(rate);
 	_currentByteSize = -1;
+
 }
 
 void ArduinoSerialIn::readIfShould()
 {
-	
 	if (Serial.available() >= 1 && _currentByteSize == -1)
 	{
 		Serial.println("Hello");
 		uint8_t type = (uint8_t) Serial.read();
-		_currentByteSize = SerialTypes::getTypeNumBytes(type);
 		_currentType = type;
+		_currentByteSize = SerialTypes::getTypeNumBytes(type);
+		Serial.println(_currentType);
+		Serial.println(_currentByteSize);
 	}
 	else if (_currentByteSize != -1 && Serial.available() >= _currentByteSize)
 	{
@@ -26,15 +27,21 @@ void ArduinoSerialIn::readIfShould()
 
 void ArduinoSerialIn::readIfArray(uint8_t currType)
 {
-	if (currType != SerialTypes::ARR_FORM || currType != SerialTypes::ARR_NO_FORM)
+	if (currType != SerialTypes::ARR_FORM && currType != SerialTypes::ARR_NO_FORM)
 	{
 		Serial.println("ERROR in read, serial out of sync");
+		Serial.println(currType);
+		Serial.println(SerialTypes::ARR_FORM);
 		return;
 	}
 	while (Serial.available() < 5){} //1 byte for the type of the array and 4 bytes for the size
+	Serial.println("Location1");
 	uint8_t arrayElementType = Serial.read();
+	_currentByteSize = SerialTypes::getTypeNumBytes(arrayElementType);
 	uint32_t arrayLength = readIntType<uint32_t>();
-	while (Serial.available() < arrayLength*SerialTypes::getTypeNumBytes(arrayElementType)) {}
+	Serial.println(arrayElementType);
+	Serial.println(arrayLength);
+	while (Serial.available() < arrayLength*_currentByteSize) {}
 	if (currType == SerialTypes::ARR_FORM)
 	{
 		Serial.print("[");
@@ -58,10 +65,15 @@ template <typename T>
 T ArduinoSerialIn::readIntType()
 {
 	T incoming = 0;
+	Serial.println("incoming");
+	Serial.println(sizeof(incoming));
 	for (int i = 0; i < _currentByteSize; i++)
 	{
-		incoming |= Serial.read() << (i * 8);
+		T nextByte = (T) Serial.read();
+		incoming |=  nextByte << (i * 8);
+		Serial.println(incoming);
 	}
+	Serial.println("incoming done");
 	return incoming;
 }
 
@@ -82,6 +94,7 @@ float ArduinoSerialIn::readFloatType()
 
 void ArduinoSerialIn::readAndPrintType(uint8_t type, bool putOnNewLine)
 {
+	Serial.println("In read and print type");
 	switch (type)
 	{
 		case SerialTypes::BOOL:

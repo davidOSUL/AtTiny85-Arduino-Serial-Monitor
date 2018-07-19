@@ -5,16 +5,16 @@
 class SerialTypes
 {
 	public:	
-		enum Type {
-			BOOL,
-			CHAR,
-			INT8,
-			UINT8,
-			INT16,
-			UINT16,
-			INT32,
-			UINT32,
-			FLOAT
+		enum Type { //defining values isn't strictly necessary, but is for clarity
+			BOOL = 0,
+			CHAR = 1,
+			INT8 = 2,
+			UINT8 = 3,
+			INT16 = 4,
+			UINT16 = 5,
+			INT32 = 6,
+			UINT32 = 7,
+			FLOAT = 8
 		
 		};
 	static uint8_t getTypeNumBytes(Type type);

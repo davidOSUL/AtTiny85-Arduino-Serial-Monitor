@@ -4,10 +4,10 @@
 #include "Arduino.h"
 #include <SoftwareSerial.h>
 #include "SerialTypes.h"
+#define USE_DELAY
 class TinySerialOut {
 public:
 	TinySerialOut(uint8_t RX, uint8_t  TX);
-	TinySerialOut(uint8_t RX, uint8_t TX, int rate);
 	writeBool(bool out);
 
 	writeCharAsCharacter(char out);
@@ -24,12 +24,11 @@ public:
 	writeFloat(float out);
 	
 	writeArray(void * out, SerialTypes::Type type, uint32_t length, bool addFormatting);
-	
+	begin(int rate);
 private:
 	SoftwareSerial _mySerial;
 	writeAllBytes(void  * bytes, uint8_t numBytes);
 	writeArrayLength(uint32_t size);
 
 };
-
 #endif

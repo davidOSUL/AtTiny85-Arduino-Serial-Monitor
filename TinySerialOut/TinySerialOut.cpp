@@ -4,10 +4,6 @@
 #include <SoftwareSerial.h>
 //typedef SerialTypes Type;
 	TinySerialOut::TinySerialOut(uint8_t RX, uint8_t TX) : _mySerial(SoftwareSerial(RX, TX)){
-		_mySerial.begin(9600);
-	}
-	TinySerialOut::TinySerialOut(uint8_t RX, uint8_t TX, int rate) : _mySerial(SoftwareSerial(RX, TX)) {
-		_mySerial.begin(rate);
 	}
 	TinySerialOut::writeBool(bool out) {
 		_mySerial.write((uint8_t)SerialTypes::BOOL);
@@ -59,6 +55,9 @@
 			_mySerial.write(newOut[i]);
 		}
 		_mySerial.flush();
+		#ifdef USE_DELAY
+			delay(100);
+		#endif
 	}
 	TinySerialOut::writeAllBytes(void * bytes, uint8_t numBytes) {
 		uint8_t * newBytes = (uint8_t *) bytes;
@@ -66,7 +65,13 @@
 			_mySerial.write(newBytes[i]);
 		}
 		_mySerial.flush();
+		#ifdef USE_DELAY
+			delay(100);
+		#endif
 	}
 	TinySerialOut::writeArrayLength(uint32_t size) {
 		writeAllBytes(&size, SerialTypes::getTypeNumBytes(SerialTypes::UINT32));
+	}
+	TinySerialOut::begin(int rate) {
+		_mySerial.begin(rate);
 	}

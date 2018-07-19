@@ -22,7 +22,7 @@
 				return 4;
 				break;
 			default:
-				return -1;
+				return 6; //if array
 				break;
 		}
 	}
