@@ -1,34 +1,35 @@
 
-#ifndef TinySerialOut
-#define TinySerialOut
+#ifndef TinySerialOut_h
+#define TinySerialOut_h
 #include "Arduino.h"
 #include <SoftwareSerial.h>
+#include "SerialTypes.h"
 class TinySerialOut {
 public:
-	TinySerialOut(int RX, int TX);
+	TinySerialOut(uint8_t RX, uint8_t  TX);
+	TinySerialOut(uint8_t RX, uint8_t TX, int rate);
 	writeBool(bool out);
 
-	writeChar(char out);
+	writeCharAsCharacter(char out);
 
-	writeByte(byte out);
-	
-	writeInt32(int32_t out);
-	writeUnsignedInt32(uint32_t out);
+	writeInt8(int8_t out);
+	writeUnsignedInt8(uint8_t out);
 
 	writeInt16(int16_t out);
 	writeUnsignedInt16(uint16_t out);
-	
+		
+	writeInt32(int32_t out);
+	writeUnsignedInt32(uint32_t out);
+
 	writeFloat(float out);
 	
-	writeDouble(double out);
+	writeArray(void * out, SerialTypes::Type type, uint32_t length, bool addFormatting);
 	
-	writeLong(long out);
-
-	writeString(String out);
-	writeCharArray(char[] out);
 private:
 	SoftwareSerial _mySerial;
+	writeAllBytes(void  * bytes, uint8_t numBytes);
+	writeArrayLength(uint32_t size);
 
-}
+};
 
 #endif
