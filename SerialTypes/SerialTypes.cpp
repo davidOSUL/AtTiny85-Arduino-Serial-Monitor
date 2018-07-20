@@ -1,3 +1,7 @@
+/*
+* Contains enum for different data types, and method to get amount of bytes
+* Author: David O'Sullivan
+*/
 #include "SerialTypes.h"
 #include "Arduino.h"
 	static const uint8_t SerialTypes::ARR_FORM = FLOAT+1;
