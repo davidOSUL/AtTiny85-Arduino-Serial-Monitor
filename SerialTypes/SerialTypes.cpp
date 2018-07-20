@@ -1,6 +1,7 @@
 /*
 * Contains enum for different data types, and method to get amount of bytes
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #include "SerialTypes.h"
 #include "Arduino.h"
@@ -25,8 +26,12 @@
 			case FLOAT:
 				return 4;
 				break;
+			case ARR_NO_FORM:
+			case ARR_FORM:
+				return 6; 
+				break;
 			default:
-				return 6; //if array
+				return 0;
 				break;
 		}
 	}

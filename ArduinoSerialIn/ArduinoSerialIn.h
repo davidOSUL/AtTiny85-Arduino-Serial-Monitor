@@ -1,6 +1,7 @@
 /*
 * Library to be uploaded to arduino to read input from teensy
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #ifndef ArduinoSerialIn_h
 #define ArduinoSerialIn_h

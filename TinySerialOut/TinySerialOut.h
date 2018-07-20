@@ -1,7 +1,8 @@
 
 /*
 * Library Uploaded to AtTiny to Write to arduino
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #ifndef TinySerialOut_h
 #define TinySerialOut_h
@@ -9,7 +10,7 @@
 #include <SoftwareSerial.h>
 #include "SerialTypes.h"
 /*
-*Comment Out To Prevent 100 ms delay after writing (not reccomended if frequent calls will be made)
+*Comment Out To Prevent 100 ms delay after writing (not reccomended if frequent calls will be made, can cause timing issues)
 */
 #define USE_DELAY 
 
@@ -71,19 +72,23 @@
 class TinySerialOut {
 	
 public:
-	TinySerialOut(uint8_t RX, uint8_t  TX);
+	/*
+	*The Digital Pin on the attiny. Note that this is not the same pin # as the literal hardware pin. Instead this is the digital pin #
+	(E.g. if you are putting a wire from hardware pin 3 (the 3rd down on the lefthand side), TX would be 4). 
+	*/
+	TinySerialOut(uint8_t  TX);
 	#ifdef USE_BOOL
 		/*
-		*Writes a boolean (1 or 0)
+		*Writes a boolean (true or false). To write a 1 or a 0 use writeUnsignedInt8
 		*/
 		writeBool(bool out);
 	#endif
 
 	#ifdef USE_CHAR
 		/*
-		*Writes a alphanumeric character (e.g. 'f'). To write a character as a number use writeInt8
+		*Writes a alphanumeric character (e.g. 'h'). To write a character as a number use writeInt8
 		*/
-		writeCharAsCharacter(char out);
+		writeChar(char out);
 	#endif
 
 	#ifdef USE_INT8
@@ -176,14 +181,16 @@ begin(int rate);
 #ifdef USE_SHORTHAND_FUNCTIONS
 	#ifdef USE_INT16
 		/*
-		* Same as calling writeInt16(out);
+		* Same as calling writeInt16(out); 
+		* Note that int16_t is equivalent to arduinos "int"
 		*/
 		write(int16_t out);
 	#endif
 	
 	#ifdef USE_INT32
 		/*
-		* Same as calling writeInt32(out);
+		* Same as calling writeInt32(out).
+		* Note that int32_t is equivalent to arduinos "long"
 		*/
 		write(int32_t out);
 	#endif
@@ -195,6 +202,20 @@ begin(int rate);
 		write(char * out, uint32_t length);
 	#endif
 	
+	#ifdef USE_BOOL
+		/*
+		*Same as calling writeBool(out);
+		*/
+		write(bool out);
+	#endif
+
+	#ifdef USE_CHAR
+		/*
+		*Same as calling writeChar(out);
+		*/
+		write(char out);
+	#endif
+	
 	#ifdef USE_FLOAT
 		/*
 		* Same as calling writeFloat(out);
@@ -203,7 +224,7 @@ begin(int rate);
 		/*
 		* Same as calling writeFloat(out);
 		*(note that AtTiny does not actually have "doubles", they are just converted to floats.
-		*However, defining this function allows one to avoid appending "f" to numeric constant)
+		* However, defining this function allows one to avoid appending "f" to numeric constant)
 		*/
 		write(double out); 
 	#endif

@@ -1,6 +1,7 @@
 /*
 * Contains enum for different data types, and method to get amount of bytes
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #ifndef SerialTypes_h
 #define SerialTypes_h

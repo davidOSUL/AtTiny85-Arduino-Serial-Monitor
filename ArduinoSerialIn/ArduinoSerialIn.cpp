@@ -1,6 +1,7 @@
 /*
 * Library to be uploaded to arduino to read input from teensy
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #include "ArduinoSerialIn.h"
 #include "SerialTypes.h"
@@ -17,12 +18,12 @@ void ArduinoSerialIn::readIfShould()
 	
 	if (Serial.available() >= 1 && _currentByteSize == -1)
 	{
-		//Serial.println("Hello");
 		uint8_t type = (uint8_t) Serial.read();
 		_currentType = type;
 		_currentByteSize = SerialTypes::getTypeNumBytes(type);
-		//Serial.println(_currentType);
-		//Serial.println(_currentByteSize);
+		if (_currentByteSize == 0) {
+			Serial.println("ERROR in read, serial out of sync");
+		}
 	}
 	else if (_currentByteSize != -1 && Serial.available() >= _currentByteSize)
 	{
@@ -36,19 +37,17 @@ void ArduinoSerialIn::readIfArray(uint8_t currType)
 	if (currType != SerialTypes::ARR_FORM && currType != SerialTypes::ARR_NO_FORM)
 	{
 		Serial.println("ERROR in read, serial out of sync");
-		//Serial.println(currType);
-		//Serial.println(SerialTypes::ARR_FORM);
 		return;
 	}
 	while (Serial.available() < 5){} //1 byte for the type of the array and 4 bytes for the size
-	//Serial.println("Location1");
+	
 	uint8_t arrayElementType = Serial.read();
 	_currentByteSize = SerialTypes::getTypeNumBytes(SerialTypes::UINT32);
 	uint32_t arrayLength = readIntType<uint32_t>();
 	_currentByteSize = SerialTypes::getTypeNumBytes(arrayElementType);
-	//Serial.println(arrayElementType);
-	//Serial.println(arrayLength);
-	while (Serial.available() < arrayLength*_currentByteSize) {}
+	
+	while (Serial.available() < arrayLength*_currentByteSize) {} //wait for all elements to be read
+	
 	if (currType == SerialTypes::ARR_FORM)
 	{
 		Serial.print("[");
@@ -60,6 +59,7 @@ void ArduinoSerialIn::readIfArray(uint8_t currType)
 		}
 		Serial.print("]");
 	}
+
 	else if (currType == SerialTypes::ARR_NO_FORM)
 	{
 		for (int i = 0; i < arrayLength; i++) {
@@ -73,17 +73,11 @@ template <typename T>
 T ArduinoSerialIn::readIntType()
 {
 	T incoming = 0;
-	//Serial.println("incoming");
-	//Serial.println(sizeof(incoming));
 	for (int i = 0; i < _currentByteSize; i++)
 	{
 		T nextByte = (T) Serial.read();
-		//Serial.println((uint8_t)nextByte);
-		//Serial.println(nextByte);
 		incoming |=  nextByte << (i * 8);
-		//Serial.println(incoming);
 	}
-	//Serial.println("incoming done");
 	return incoming;
 }
 
@@ -92,7 +86,7 @@ float ArduinoSerialIn::readFloatType()
 	typedef union
 	{
 		float floatVal;
-		byte asBytes[4];
+		uint8_t asBytes[4];
 	} binaryFloat;
 	binaryFloat floatWithBytes;
 	for (int i = 0; i < 4; i++)
@@ -104,14 +98,13 @@ float ArduinoSerialIn::readFloatType()
 
 void ArduinoSerialIn::readAndPrintType(uint8_t type, bool putOnNewLine)
 {
-	//Serial.println("In read and print type");
 	switch (type)
 	{
 		case SerialTypes::BOOL:
 			if (putOnNewLine)
-			 	Serial.println(readIntType<bool>());
+			 	Serial.println(readIntType<bool>() ? "true" : "false");
 			else
-				Serial.print(readIntType<bool>());
+				Serial.print(readIntType<bool>()  ? "true" : "false");
 			break;
 		case SerialTypes::CHAR:
 			if (putOnNewLine)

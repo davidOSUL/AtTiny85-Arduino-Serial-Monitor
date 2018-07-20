@@ -1,12 +1,13 @@
 /*
 * Library Uploaded to AtTiny to Write to arduino
-* Author: David O'Sullivan
+* By: David O'Sullivan
+* https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
 */
 #include "Arduino.h"
 #include "TinySerialOut.h"
 #include "SerialTypes.h"
 #include <SoftwareSerial.h>
-	TinySerialOut::TinySerialOut(uint8_t RX, uint8_t TX) : _mySerial(SoftwareSerial(RX, TX)){
+	TinySerialOut::TinySerialOut(uint8_t TX) : _mySerial(SoftwareSerial(-1, TX)){
 	}
 	#ifdef USE_BOOL
 		TinySerialOut::writeBool(bool out) {
@@ -16,7 +17,7 @@
 	#endif 
 
 	#ifdef USE_CHAR
-		TinySerialOut::writeCharAsCharacter(char out) {
+		TinySerialOut::writeChar(char out) {
 			_mySerial.write((uint8_t)SerialTypes::CHAR);
 			writeAllBytes(&out, SerialTypes::getTypeNumBytes(SerialTypes::CHAR));
 		}
@@ -132,6 +133,18 @@
 	#ifdef USE_ARRAY
 		TinySerialOut::write(char * out, uint32_t length) {
 			writeString(out, length);
+		}
+	#endif
+
+	#ifdef USE_BOOL
+		TinySerialOut::write(bool out) {
+			writeBool(out);
+		}
+	#endif
+
+	#ifdef USE_CHAR
+		TinySerialOut::write(char out) {
+			writeChar(out);
 		}
 	#endif
 	

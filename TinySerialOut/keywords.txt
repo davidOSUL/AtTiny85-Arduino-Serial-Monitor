@@ -1,0 +1,12 @@
+TinySerialOut	KEYWORD1
+writeBool	KEYWORD1
+writeChar	KEYWORD1
+writeInt8	KEYWORD1
+writeUnsignedInt8	KEYWORD1
+writeInt16	KEYWORD1
+writeUnsignedInt16	KEYWORD1
+writeInt32	KEYWORD1
+writeUnsignedInt32	KEYWORD1
+writeFloat	KEYWORD1
+writeArray	KEYWORD1
+writeString	KEYWORD1
