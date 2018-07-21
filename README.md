@@ -72,7 +72,7 @@ writeFloat
 writeArray
 writeString //a char array, not the Arduino String object
 ```
-The second just uses the overloaded `write(...)` function, which allows for many different data types, namely:
+The second just uses an overloaded `write(...)` function, which allows for many different data types, namely:
 ```
 int16_t (int)
 int32_t (long)
