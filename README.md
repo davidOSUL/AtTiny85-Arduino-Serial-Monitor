@@ -7,7 +7,7 @@ Serial interface for ATTiny that allows you to print different data types to an 
 These instructions assume you are already able to upload code to your ATTiny using the Arduino IDE. For a good tutorial on how to do that check out [this](https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829).
 
 ### Installation
-- Download  [this zip file](google.com)
+- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/AtTiny85-Arduino-Serial-Monitor.zip) (also avaialble in releases tab). 
 
 - Using Arduino IDE 1.0.x:
   - **Sketch > Import Library... > Add Library... >** select the downloaded file **> Open**
@@ -30,7 +30,7 @@ If all you are doing with this arduino is serial monitoring, you won't have to c
      - **File > Examples > AtTiny85-Arduino-Serial-Monitor > ExplicitWrites**   
      - **File > Examples > AtTiny85-Arduino-Serial-Monitor > ImplicitWrites**    
 
-For more details on using these functions see **TinySerialOut Details** below.
+For more details on using these functions see [**TinySerialOut Details**](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/README.md#tinyserialout-details) below.
 
 ### Wiring
 Once you've uploaded your code to your Tiny, and the provided code to your arduino, you'll need to connect the two.
@@ -42,7 +42,7 @@ Essentially you'll want to hook up your designated TX pin on your Tiny to the Ar
 This library uses one way communication (Tiny -> Arduino), so it only needs one pin on the Tiny for serial communication.   
 The schematic shown uses the same pin numbers as used in the included examples, but any of the digital pins should work.       
 ### Putting everything together: Reading Serial Data
-Once you've uploaded the correct code to your arduino as described in **Setting Up the Arduino**, and you've uploaded code 
+Once you've uploaded the correct code to your arduino as described in [**Setting Up the Arduino**](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor#setting-up-the-arduino), and you've uploaded code 
 to your Tiny that contains some serial output, and wired everything together:
 1. Power on the Arduino
 2. Make sure that you have the port (**Tools > Port**) corresponding to the Arduino selected
