@@ -7,29 +7,30 @@ Serial interface for ATTiny that allows you to print different data types to an 
 These instructions assume you are already able to upload code to your ATTiny using the Arduino IDE. For a good tutorial on how to do that check out [this](https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829).
 
 ### Installation
-- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/raw/master/AtTiny85-Arduino-Serial-Monitor.zip)
-(also avaialble in releases tab). 
-
+The library has to be downloaded as three seperate "libraries" due to the way that things are compiled. To do so:   
+- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/raw/master/AtTiny85-Arduino-Serial-Monitor.zip) (also avaialble in releases tab). 
+- Unzip this file. Inside are three more zip files.    
+For all three of these zip files, do the following:    
 - Using Arduino IDE 1.0.x:
-  - **Sketch > Import Library... > Add Library... >** select the downloaded file **> Open**
+  - **Sketch > Import Library... > Add Library... >** select the zip file **> Open**
 - Using Arduino IDE 1.5+:
-  - **Sketch > Include Library > Add ZIP Library... >** select the downloaded file **> Open**
+  - **Sketch > Include Library > Add ZIP Library... >** select the zip file **> Open**
 
 ## Using the Library
 - The code uploaded to your Tiny will allow you to write out data
 - You'll also have to upload some code to your Arduino to be able to print out incomming data from the Tiny to the Serial Monitor
 
 ### Setting up the Arduino
-1. Navigate to: **File > Examples > AtTiny85-Arduino-Serial-Monitor > ArduinoSerialInCode**.   
+1. Navigate to: **File > Examples > ArduinoSerialIn > ArduinoSerialInCode**.   
 2. Upload this code to your Arduino. 
   
 If all you are doing with this arduino is serial monitoring, you won't have to change this code.
 
 ### Writing Tiny Code that makes use of Serial
 1. Upload code to your Tiny
-   - To see examples of code you can upload to your tiny:
-     - **File > Examples > AtTiny85-Arduino-Serial-Monitor > ExplicitWrites**   
-     - **File > Examples > AtTiny85-Arduino-Serial-Monitor > ImplicitWrites**    
+   - To make sure Serial is working and to see examples of how to use it, you can upload one of the following to your tiny:
+     - **File > Examples > TinySerialOut > ExplicitWrites**   
+     - **File > Examples > TinySerialOut > ImplicitWrites**    
 
 For more details on using these functions see [**TinySerialOut Details**](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/README.md#tinyserialout-details) below.
 
@@ -37,7 +38,7 @@ For more details on using these functions see [**TinySerialOut Details**](https:
 Once you've uploaded your code to your Tiny, and the provided code to your arduino, you'll need to connect the two.
 
 
-Essentially you'll want to hook up your designated TX pin on your Tiny to the Arduino's RX Pin with a 330 ohm resistor in series. Then hook up the Tiny's Voltage pin to 5V and GND to GND.
+You'll want to hook up your designated TX pin on your Tiny to the Arduino's RX Pin with a 330 ohm resistor in series. Then hook up the Tiny's Voltage pin to 5V and GND to GND.
 ![scehmatic](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/schematic.jpg)
 
 This library uses one way communication (Tiny -> Arduino), so it only needs one pin on the Tiny for serial communication.   

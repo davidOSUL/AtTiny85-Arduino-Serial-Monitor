@@ -15,7 +15,7 @@
 #define USE_DELAY 
 
 /*
-*Change default delay (reccomended: 100)
+*Change default delay (recomended: 100)
 */
 #define DELAY 100
 
