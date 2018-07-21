@@ -1,6 +1,9 @@
 /*
- * Example of using the explictly named functions (writeInt8, writeFloat, etc.) 
- * to write values out. 
+ * Example of using the implicit "write" function to write different types of data.
+ * Note that this function is provided for convenience but does not introduce any additional functionality. 
+ * 
+ * Values that can be written out using write(...) are: 
+ * int16_t (Arduino's "int"), int32_t (Arduino's "long"), char arrays, bool, char, float
  * By: David O'Sullivan
  * https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor
  * 
@@ -12,12 +15,16 @@
  * Optionally connect an LED to pin D0 (physical pin 5) with a resistor in series. This will light up when the 
  * AtTiny turns on so you know its working
  * 
- * Upload this code to the ATTiny
+ * Upload this code to the ATTiny. 
+ * Make sure you have selected the correct processor and clock (Internal 8 MHZ most likely)
  */
 #include <TinySerialOut.h>
 #include <SerialTypes.h>
+
 #define TX 4 //This is output pin to send serial data over: D4 (physical pin 3 on ATTiny85)
 #define LED_PIN 0 //connect an LED to make sure the tiny is turning on. This is pin D0 (physical pin 5 on ATTiny85)
+
+#define STRING_WRITE(str) (SerialOut.write(str, sizeof(str))) //macro to make writing strings easier
 
 TinySerialOut SerialOut(TX); //create the serial to be used on this tiny. To get arduino style coloring, name this "Serial" 
 void setup() {
@@ -30,58 +37,47 @@ void setup() {
 
 void loop() {
   /*
-   * Outputs a written character. To Output the numerical value instead,
-   * use writeInt8. 
+   * Outputs a written character. 
    */
   char letter = 't';
-  SerialOut.writeChar(letter); 
+  SerialOut.write(letter); 
 
   /*
    * Outputs a string. Note that the second input to 
-   * writeString is the length of the char array.
-   * sizeof works fine  because characters are 1 byte each.
+   * write when using a char array is the length of the char array.
+   * sizeof works fine because characters are 1 byte each.
    */
   char message[] = "Hello, world!";
-  SerialOut.writeString(message, sizeof(message));
+  SerialOut.write(message, sizeof(message));
 
   /*
-   *Writes an array of ints with formatting. Will be outputted as:
-   *"[1,2,3,4,5]"
-   *Note that the syntax is:
-   *(array, the type of elements of the array, the length of the array, whether or not to include formatting)
-   *Note that length == # of elements, *not* the total number of bytes
-   *
-   *(Without formatting this would be output as: "12345")
+   * Using the macro STRING_WRITE defined above, we could also do:
    */
-  int16_t ints[] = {1,2,3,4,5};
-  SerialOut.writeArray(ints, SerialTypes::INT16, 5, true);
-
+  STRING_WRITE("Good day, planet!");
+  
   /*
-   * Outputs a signed 32 bit integer. 
-   * Similarly named functions exist for signed 8 and 16 bit integers
+   * Outputs an int (a signed 16 bit integer).
    */
-  int32_t int32Max = 2147483647;
-  SerialOut.writeInt32(int32Max);
-
+  int intMax = 32767;
+  SerialOut.write(intMax);
+  
   /*
-   * Outputs an unsigned 8 bit integer.
-   * Similarly named functions exist for 16 and 32 bit integers.
+   * Outputs a long (a signed 32 bit integer).
    */
-  uint8_t meaningOfLife = 42;
-  SerialOut.writeUnsignedInt8(meaningOfLife);
-
+   long longMax = 2147483647;
+   SerialOut.write(longMax);
+ 
  /*
-  * Outputs a bool as "true". 
-  * To output a "1" instead, use writeUnsignedInt8
+  * Outputs a bool as "false". 
   */
-  bool kaleIsHealthy = true;
-  SerialOut.writeBool(kaleIsHealthy);
+  bool candyIsHealthy = false;
+  SerialOut.write(candyIsHealthy);
 
   /*
    * Outputs a floating point value.
    */
   float floatVal = -123.45;
-  SerialOut.writeFloat(floatVal);
+  SerialOut.write(floatVal);
   
 
 }

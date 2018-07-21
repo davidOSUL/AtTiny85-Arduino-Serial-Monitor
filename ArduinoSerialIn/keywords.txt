@@ -1,2 +1,0 @@
-ArduinoSerialIn	KEYWORD1
-readIfShould	KEYWORD1
