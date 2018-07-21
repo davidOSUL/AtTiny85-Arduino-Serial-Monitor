@@ -58,7 +58,7 @@ To write serial data from your Tiny include `TinySerialOut.h` in the code that y
 
 The TinySerialOut object contains two groups of functions to use. 
 
-The first allows you explicity state what type of value are sending:
+The first allows you explicity state what type of value you are sending:
 ```
 writeBool
 writeChar
