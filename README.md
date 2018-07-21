@@ -149,9 +149,13 @@ SerialOut.write(message, sizeof(message));
 
 You may also find it useful to define a macro such as:
 ```
-#define STRING_WRITE(str) (SerialOut.write(str, sizeof(str)))
+//assuming you named your TinySerialOut object "SerialOut"
+#define STRING_WRITE(str) (SerialOut.write(str, sizeof(str))) 
 ```
-
+So that in your code you can do something like:   
+```
+STRING_WRITE("hello");
+```
 ### Defined Delay
 The library automatically adds in an 100 ms delay after each message. I found this alleviates 
 timing issues that occur when sending multiple messages quickly (in a loop for instance). If you'd like to get rid of this you can open up the `TinySerialOut.h` file and comment out:
