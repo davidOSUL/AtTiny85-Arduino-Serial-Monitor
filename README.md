@@ -146,7 +146,7 @@ You can also try changing the length of this delay by changing the value defined
 #define DELAY 100
 ```
 Depending on your prorgam, you may run into some ssues if you change these values. 
-### Excluding Unwanted functions
+### Excluding Unwanted Functions
 Most likely your compiler will optimize away any uncalled functions.  But just in case, you can remove them yourself as well. This may or may not save some space on the code uploaded to your Tiny.
 
 Provided in the `TinySerialOut.h` file are a series of defines that can be commented out to explicitly remove certain functions from compilation. 
