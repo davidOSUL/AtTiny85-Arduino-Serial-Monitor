@@ -141,6 +141,11 @@ timing issues that occur when sending multiple messages quickly (in a loop for i
 ```
 #define USE_DELAY 
 ```
+You can also try changing the length of this delay by changing the value defined at:
+```
+#define DELAY 100
+```
+Depending on your prorgam, you may run into some ssues if you change these values. 
 ### Excluding Unwanted functions
 Most likely your compiler will optimize away any uncalled functions.  But just in case, you can remove them yourself as well. This may or may not save some space on the code uploaded to your Tiny.
 
