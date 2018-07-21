@@ -7,7 +7,8 @@ Serial interface for ATTiny that allows you to print different data types to an 
 These instructions assume you are already able to upload code to your ATTiny using the Arduino IDE. For a good tutorial on how to do that check out [this](https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829).
 
 ### Installation
-- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/AtTiny85-Arduino-Serial-Monitor.zip) (also avaialble in releases tab). 
+- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/raw/master/AtTiny85-Arduino-Serial-Monitor.zip)
+(also avaialble in releases tab). 
 
 - Using Arduino IDE 1.0.x:
   - **Sketch > Import Library... > Add Library... >** select the downloaded file **> Open**
