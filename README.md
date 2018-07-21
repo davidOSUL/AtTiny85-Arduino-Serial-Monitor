@@ -61,6 +61,9 @@ to your Tiny that contains some serial output, and [wired](https://github.com/da
 to close it and open it again, most likely you'll get bad values, and you'll have to power off and power back on your arduino.
 4. Open up the Serial Monitor and read incoming data from the Tiny!
 
+For example, heres what you should see on the Serial Monitor if you've uploaded the "ImplicitWrites" example to your Tiny:   
+
+![implictWritePic](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/implicitoutput.png)
 
 ## Other Notes
 ### TinySerialOut Details
