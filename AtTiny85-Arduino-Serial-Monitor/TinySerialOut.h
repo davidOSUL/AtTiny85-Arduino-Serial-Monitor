@@ -15,6 +15,11 @@
 #define USE_DELAY 
 
 /*
+*Change default delay (reccomended: 100)
+*/
+#define DELAY 100
+
+/*
 *Comment Out To disable all the overloaded write() functions
 */
 #define USE_SHORTHAND_FUNCTIONS

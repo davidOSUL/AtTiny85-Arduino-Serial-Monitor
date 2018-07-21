@@ -84,7 +84,7 @@
 			}
 			_mySerial.flush();
 			#ifdef USE_DELAY
-				delay(100);
+				delay(DELAY);
 			#endif
 		}
 		TinySerialOut::writeString(char * out, uint32_t length) {
@@ -103,7 +103,7 @@
 		writeAllBytesNoFlush(bytes, numBytes);
 		_mySerial.flush();
 		#ifdef USE_DELAY
-			delay(100);
+			delay(DELAY);
 		#endif
 	}
 
