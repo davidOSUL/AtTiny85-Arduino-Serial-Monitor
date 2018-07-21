@@ -38,6 +38,7 @@ Once you've uploaded your code to your Tiny, and the provided code to your ardui
 
 Essentially you'll want to hook up your designated TX pin on your Tiny to the Arduino's RX Pin with a 330 ohm resistor in series. Then hook up the Tiny's Voltage pin to 5V and GND to GND.
 ![scehmatic](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/schematic.jpg)
+
 This library uses one way communication (Tiny -> Arduino), so it only needs one pin on the Tiny for serial communication.   
 The schematic shown uses the same pin numbers as used in the included examples, but any of the digital pins should work.       
 ### Putting everything together: Reading Serial Data
