@@ -7,8 +7,8 @@ Serial interface for ATTiny that allows you to print different data types to an 
 These instructions assume you are already able to upload code to your ATTiny using the Arduino IDE. For a good tutorial on how to do that check out [this](https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829).
 
 ### Installation
-The library has to be downloaded as three seperate libraries.   
-- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/raw/master/AtTiny85-Arduino-Serial-Monitor.zip) (also avaialble in releases tab). 
+The library has to be downloaded as three separate libraries.   
+- Download [this zip file](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/raw/master/AtTiny85-Arduino-Serial-Monitor.zip) (also available in the releases tab). 
 - Unzip this file. Inside are three more zip files.    
   - For **each** of these zip files, do the following:    
     - Using Arduino IDE 1.0.x:
@@ -25,7 +25,7 @@ TinySerialOut
 
 ## Using the Library
 - The code uploaded to your Tiny will allow you to write out data
-- You'll also have to upload some code to your Arduino to be able to print out incomming data from the Tiny to the Serial Monitor
+- You'll also have to upload some code to your Arduino to be able to print out incoming data from the Tiny to the Serial Monitor
 
 ### Setting up the Arduino
 1. Navigate to: **File > Examples > ArduinoSerialIn > ArduinoSerialInCode**.   
@@ -61,7 +61,7 @@ to your Tiny that contains some serial output, and [wired](https://github.com/da
 to close it and open it again, most likely you'll get bad values, and you'll have to power off and power back on your arduino.
 4. Open up the Serial Monitor and read incoming data from the Tiny!
 
-For example, heres what you should see on the Serial Monitor if you've uploaded the "ImplicitWrites" example to your Tiny:   
+For example, here's what you should see on the Serial Monitor if you've uploaded the "ImplicitWrites" example to your Tiny:   
 
 ![implictWritePic](https://github.com/davidOSUL/AtTiny85-Arduino-Serial-Monitor/blob/master/implicitoutput.png)
 
@@ -76,7 +76,7 @@ To write serial data from your Tiny include `TinySerialOut.h` in the code that y
 
 The TinySerialOut object contains two groups of functions to use. 
 
-The first allows you explicity state what type of value you are sending:
+The first allows you explicitly state what type of value you are sending:
 ```
 writeBool
 writeChar
@@ -116,9 +116,9 @@ INT32
 UINT32 
 FLOAT 
 ```
-- The Third paramter is the length of the array in # of elements (**not** total byte size)   
+- The Third parameter is the length of the array in # of elements (**not** total byte size)   
 
-- The fourth paramater is whether or not you want formatting.    
+- The fourth parameter is whether or not you want formatting.    
   - A formatted array will be printed out as: "[elem1, elem2, elem3]"   
   - An unformatted array will be printed out as: "elem1elem2elem3"      
 
@@ -162,7 +162,7 @@ You can also try changing the length of this delay by changing the value defined
 ```
 #define DELAY 100
 ```
-Depending on your prorgam, you may run into some ssues if you change these values. 
+Depending on your program, you may run into some issues if you change these values. 
 ### Excluding Unwanted Functions
 Most likely your compiler will optimize away any uncalled functions.  But just in case, you can remove them yourself as well. This may or may not save some space on the code uploaded to your Tiny.
 
